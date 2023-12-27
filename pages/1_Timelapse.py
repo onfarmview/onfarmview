@@ -13,6 +13,10 @@ from datetime import date
 from shapely.geometry import Polygon
 from shapely.geometry import MultiPolygon
 
+service_account = 'onfarmview@hip-rain-278407.iam.gserviceaccount.com'
+credentials = ee.ServiceAccountCredentials(service_account, '../hip-rain-278407-e46952e76fd6.json')
+ee.Initialize(credentials)
+
 st.set_page_config(layout="wide")
 warnings.filterwarnings("ignore")
 
@@ -130,8 +134,8 @@ def app():
     st.session_state["vis_params"] = None
 
     with row1_col1:
-        geemap.ee_initialize()
-        ee_authenticate(token_name="EARTHENGINE_TOKEN", auth_mode='gcloud')
+        # geemap.ee_initialize()
+        # ee_authenticate(token_name="EARTHENGINE_TOKEN", auth_mode='gcloud')
         m = geemap.Map(
             basemap="HYBRID",
             plugin_Draw=True,
