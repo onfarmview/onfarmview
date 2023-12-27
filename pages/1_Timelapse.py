@@ -131,7 +131,7 @@ def app():
 
     with row1_col1:
         geemap.ee_initialize()
-        ee_authenticate(token_name="EARTHENGINE_TOKEN")
+        ee_authenticate(token_name="EARTHENGINE_TOKEN", auth_mode='gcloud')
         m = geemap.Map(
             basemap="HYBRID",
             plugin_Draw=True,
