@@ -17,7 +17,7 @@ st.set_page_config(layout="wide")
 warnings.filterwarnings("ignore")
 
 @st.cache_data
-def ee_authenticate(token_name="EARTHENGINE_TOKEN"):
+def ee_authenticate(token_name=st.secrets["EARTHENGINE_TOKEN"]):
     geemap.ee_initialize(token_name=token_name)
 
 import geopandas as gpd
@@ -130,7 +130,8 @@ def app():
     st.session_state["vis_params"] = None
 
     with row1_col1:
-        ee_authenticate(token_name="EARTHENGINE_TOKEN")
+        # geemap.ee_initialize()
+        ee_authenticate(token_name=st.secrets["EARTHENGINE_TOKEN"])
         m = geemap.Map(
             basemap="HYBRID",
             plugin_Draw=True,
