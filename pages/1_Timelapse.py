@@ -130,7 +130,7 @@ def app():
     st.session_state["vis_params"] = None
 
     with row1_col1:
-        # geemap.ee_initialize()
+        geemap.ee_initialize()
         ee_authenticate(token_name="EARTHENGINE_TOKEN")
         m = geemap.Map(
             basemap="HYBRID",
