@@ -14,7 +14,7 @@ from shapely.geometry import Polygon
 from shapely.geometry import MultiPolygon
 
 service_account = 'onfarmview@hip-rain-278407.iam.gserviceaccount.com'
-credentials = ee.ServiceAccountCredentials(service_account, '../hip-rain-278407-e46952e76fd6.json')
+credentials = ee.ServiceAccountCredentials(service_account, 'hip-rain-278407-e46952e76fd6.json')
 ee.Initialize(credentials)
 
 st.set_page_config(layout="wide")
