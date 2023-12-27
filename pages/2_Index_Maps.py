@@ -112,7 +112,7 @@ vis_params = {
 
 st.title("Index Maps")
 ee_authenticate(token_name="EARTHENGINE_TOKEN")
-ee.Initialize()
+# ee.Initialize()
 
 map1 = geemap.Map(
     basemap="HYBRID",
