@@ -20,12 +20,12 @@ st.write("DB password:", st.secrets["db_password"])
 # And the root-level secrets are also accessible as environment variables:
 st.write(
     "Has environment variables been set:",
-    os.environ["db_username"] == st.secrets["EARTHENGINE_TOKEN"],
+    os.environ["pk"] == st.secrets["EARTHENGINE_TOKEN"],
 )
-
+st.write(os.environ["pk"])
 
 # service_account =  "ofv-99@ee-ofv.iam.gserviceaccount.com"
-# private_key = st.secrets["private_key"]
+# private_key = os.environ["pk"]
 # credentials = ee.ServiceAccountCredentials(
 #     service_account, key_data=private_key
 # )
