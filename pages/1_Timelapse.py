@@ -22,7 +22,7 @@ st.write(
     "Has environment variables been set:",
     os.environ["pk"] == st.secrets["EARTHENGINE_TOKEN"],
 )
-st.write(os.environ["pk"])
+st.write(st.secrets["EARTHENGINE_TOKEN"])
 
 # service_account =  "ofv-99@ee-ofv.iam.gserviceaccount.com"
 # private_key = os.environ["pk"]
