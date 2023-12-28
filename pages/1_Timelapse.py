@@ -13,14 +13,13 @@ from datetime import date
 from shapely.geometry import Polygon
 from shapely.geometry import MultiPolygon
 
-import streamlit as st
-import os
+
 
 
 # And the root-level secrets are also accessible as environment variables:
 st.write(
     "Has environment variables been set:",
-    os.environ["db_username"] == st.secrets["private_key"],
+    os.environ["db_username"] == st.secrets["EARTHENGINE_TOKEN"],
 )
 
 
