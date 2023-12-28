@@ -14,7 +14,8 @@ from shapely.geometry import Polygon
 from shapely.geometry import MultiPolygon
 
 
-
+st.write("DB username:", st.secrets["db_username"])
+st.write("DB password:", st.secrets["db_password"])
 
 # And the root-level secrets are also accessible as environment variables:
 st.write(
@@ -23,13 +24,13 @@ st.write(
 )
 
 
-service_account =  "ofv-99@ee-ofv.iam.gserviceaccount.com"
-private_key = st.secrets["private_key"]
-credentials = ee.ServiceAccountCredentials(
-    service_account, key_data=private_key
-)
+# service_account =  "ofv-99@ee-ofv.iam.gserviceaccount.com"
+# private_key = st.secrets["private_key"]
+# credentials = ee.ServiceAccountCredentials(
+#     service_account, key_data=private_key
+# )
 
-ee.Initialize(credentials)
+# ee.Initialize(credentials)
 
 st.set_page_config(layout="wide")
 warnings.filterwarnings("ignore")
