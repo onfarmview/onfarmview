@@ -13,6 +13,17 @@ from datetime import date
 from shapely.geometry import Polygon
 from shapely.geometry import MultiPolygon
 
+import streamlit as st
+import os
+
+
+# And the root-level secrets are also accessible as environment variables:
+st.write(
+    "Has environment variables been set:",
+    os.environ["db_username"] == st.secrets["private_key"],
+)
+
+
 service_account =  "ofv-99@ee-ofv.iam.gserviceaccount.com"
 private_key = st.secrets["private_key"]
 credentials = ee.ServiceAccountCredentials(
