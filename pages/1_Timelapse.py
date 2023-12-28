@@ -13,8 +13,12 @@ from datetime import date
 from shapely.geometry import Polygon
 from shapely.geometry import MultiPolygon
 
-service_account = 'onfarmview@hip-rain-278407.iam.gserviceaccount.com'
-credentials = ee.ServiceAccountCredentials(service_account, 'hip-rain-278407-e46952e76fd6.json')
+service_account =  "ofv-99@ee-ofv.iam.gserviceaccount.com"
+private_key = st.secrets["private_key"]
+credentials = ee.ServiceAccountCredentials(
+    service_account, key_data=private_key
+)
+
 ee.Initialize(credentials)
 
 st.set_page_config(layout="wide")
