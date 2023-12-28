@@ -6,7 +6,7 @@ st.set_page_config(layout="wide")
 st.sidebar.title("About")
 st.sidebar.info(
     """
-    - Web App URL: https://lincolnagritech.streamlit.app/
+    - Web App URL: https://onfarmview.com/
    
     """
 )
@@ -14,11 +14,11 @@ st.sidebar.info(
 st.sidebar.title("Contact")
 st.sidebar.info(
     """
-    Thai Tran: Thai.Tran@LincolnAgritech.co.nz
+    admin@onfarmview.com
     """
 )
 
-st.title("Lincoln Agritech Geospatial Applications")
+st.title("OnFarmView - Farm Monitoring Tools")
 
 st.markdown(
     """
@@ -35,14 +35,14 @@ st.markdown(
 """
 )
 
-row1_col1, row1_col2, row1_col3 = st.columns(3)
-with row1_col1:
-    st.image("data/can.gif")
-    st.markdown("""Canterbury Region""")
+# row1_col1, row1_col2, row1_col3 = st.columns(3)
+# with row1_col1:
+#     st.image("data/can.gif")
+#     st.markdown("""Canterbury Region""")
     
-with row1_col2:
-    st.image("data/urewera.gif")
-    st.markdown("""Urewera""")
-with row1_col3:
-    st.image("data/mitimiti.gif")
-    st.markdown("""Mitimiti""")
+# with row1_col2:
+#     st.image("data/urewera.gif")
+#     st.markdown("""Urewera""")
+# with row1_col3:
+#     st.image("data/mitimiti.gif")
+#     st.markdown("""Mitimiti""")
