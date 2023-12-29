@@ -1,9 +1,35 @@
+
+import ee
+import os
+import warnings
+import datetime
+import fiona
+import geopandas as gpd
+import folium
 import streamlit as st
+import geemap.colormaps as cm
+import geemap.foliumap as geemap
+from datetime import date
+from shapely.geometry import Polygon
+from shapely.geometry import MultiPolygon
 # import leafmap.foliumap as leafmap
 
 st.set_page_config(layout="wide")
-
 st.sidebar.title("About")
+service_account =  "ofv-99@ee-ofv.iam.gserviceaccount.com"
+private_key = st.secrets["EARTHENGINE_TOKEN"]
+credentials = ee.ServiceAccountCredentials(
+    service_account, key_data=private_key
+)
+
+ee.Initialize(credentials)
+Map = geemap.Map(
+    basemap="HYBRID",
+    plugin_Draw=True,
+    Draw_export=True,
+    # locate_control=True,
+    plugin_LatLngPopup=False, center=(-43.525650, 172.639847), zoom=6.25,
+)
 st.sidebar.info(
     """
     - Web App URL: https://onfarmview.com/
@@ -34,12 +60,8 @@ st.markdown(
     The following timelapse animations for three areas.
 """
 )
-hide_streamlit_style = """
-            <style>
-            footer {visibility: hidden;}
-            </style>
-            """
-st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+Map.addLayerControl()
+Map.to_streamlit(height=600)
 # row1_col1, row1_col2, row1_col3 = st.columns(3)
 # with row1_col1:
 #     st.image("data/can.gif")
