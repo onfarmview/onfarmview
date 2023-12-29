@@ -34,7 +34,12 @@ st.markdown(
     The following timelapse animations for three areas.
 """
 )
-
+hide_streamlit_style = """
+            <style>
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 # row1_col1, row1_col2, row1_col3 = st.columns(3)
 # with row1_col1:
 #     st.image("data/can.gif")
