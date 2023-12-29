@@ -1,7 +1,7 @@
 # OnFarmView - Farm Monitoring Tools
 
 
-- Web app: <https://https://onfarmview.com/>
+- Web app: <https://onfarmview.com/>
 
 
 ## Demo
