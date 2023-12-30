@@ -64,7 +64,7 @@ default_date_yesterday = today - timedelta(days=1)
 
 # cols1,_ = st.columns((1,2)) 
 # col1, col2, col3 = st.columns(3)
-row1_col0, row1_col1, row1_col2 = st.columns([3, 1])
+row1_col0, row1_col1, row1_col2 = st.columns(3)
 with row1_col1:
     sd = st.date_input(
         "Start date", date(2023, 10, 1), min_value= date(2015, 6, 23),
