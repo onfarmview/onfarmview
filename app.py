@@ -26,7 +26,7 @@ st.title("OnFarmView - Farm Monitoring Tools")
 
 st.markdown(
     """
-    An online interactive mapping tool to display basic vegetative metrics available over New Zealand.
+    Tools to display basic vegetative metrics.
     """
 )
 
@@ -81,7 +81,8 @@ Map = geemap.Map(
     plugin_Draw=True,
     Draw_export=True,
     # locate_control=True,
-    plugin_LatLngPopup=True, center=(-43.525650, 172.639847), zoom=6.25,
+    plugin_LatLngPopup=True, 
+    # center=(-43.525650, 172.639847), zoom=5,
 )
 
 filename = "data.geojson"
@@ -93,12 +94,13 @@ vis_params = {
   'max': 1,
   'palette': palette}
 aoi= geemap.gdf_to_ee(gdf, geodesic=False)    
-Map.centerObject(aoi)
+Map.centerObject(aoi, zoom=5)
 NDVI_data = ee.ImageCollection('COPERNICUS/S2_SR').filterDate(start_date, end_date).filter(ee.Filter.lt("CLOUDY_PIXEL_PERCENTAGE",90)).map(maskCloudAndShadows).map(getNDVI).map(addDate).median()
 Map.addLayer(NDVI_data.clip(aoi).select('NDVI'), vis_params, "Median of NDVI")    
+Map.add_colormap(width=10, height=0.1, vmin=0, vmax=1,vis_params= vis_params,label="NDVI", position=(0, 0))  
 
 Map.addLayerControl()
-Map.to_streamlit(height=600)
+Map.to_streamlit(height=550)
 
 # st.info("Click on the left sidebar menu to navigate to the different apps.")
 
