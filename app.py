@@ -58,8 +58,10 @@ credentials = ee.ServiceAccountCredentials(
     service_account, key_data=private_key
 )
 ee.Initialize(credentials)
+
 today = date.today()
 default_date_yesterday = today - timedelta(days=1)
+
 sd = st.date_input(
     "Start date", date(2023, 10, 1), min_value= date(2015, 6, 23),
     max_value= today,
@@ -68,7 +70,7 @@ sd = st.date_input(
 ed = st.date_input(
     "End date",
     default_date_yesterday,
-    min_value= date(2023, 12, 31),max_value= today)      
+    min_value= date(2023, 12, 1),max_value= today)      
 
 start_date = sd.strftime("%Y-%m-%d") + "T" 
 end_date = ed.strftime("%Y-%m-%d") + "T" 
@@ -85,15 +87,15 @@ Map = geemap.Map(
 # filename = "data.geojson"
 # file = open(filename)
 # gdf = gpd.read_file(file)
-palette = ['FFFFFF', 'CE7E45', 'DF923D', 'F1B555', 'FCD163', '99B718', '74A901', '66A000', '529400', '3E8601', '207401', '056201', '004C00', '023B01', '012E01', '011D01', '011301']
-vis_params = {
-  'min': 0,
-  'max': 1,
-  'palette': palette}
+# palette = ['FFFFFF', 'CE7E45', 'DF923D', 'F1B555', 'FCD163', '99B718', '74A901', '66A000', '529400', '3E8601', '207401', '056201', '004C00', '023B01', '012E01', '011D01', '011301']
+# vis_params = {
+#   'min': 0,
+#   'max': 1,
+#   'palette': palette}
 # aoi= geemap.gdf_to_ee(gdf, geodesic=False)    
 # Map.centerObject(aoi)
-NDVI_data = ee.ImageCollection('COPERNICUS/S2_SR').filterDate(start_date, end_date).filter(ee.Filter.lt("CLOUDY_PIXEL_PERCENTAGE",90)).map(maskCloudAndShadows).map(getNDVI).map(addDate).median()
-Map.addLayer(NDVI_data.select('NDVI'), vis_params, "Median of NDVI")    
+# NDVI_data = ee.ImageCollection('COPERNICUS/S2_SR').filterDate(start_date, end_date).filter(ee.Filter.lt("CLOUDY_PIXEL_PERCENTAGE",90)).map(maskCloudAndShadows).map(getNDVI).map(addDate).median()
+# Map.addLayer(NDVI_data.select('NDVI'), vis_params, "Median of NDVI")    
 
 Map.addLayerControl()
 Map.to_streamlit(height=600)
