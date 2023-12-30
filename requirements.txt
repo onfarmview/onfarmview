@@ -1,6 +1,6 @@
 --find-links=https://girder.github.io/large_image_wheels GDAL
 # cartopy
-
+lxml==4.9.4
 folium
 geemap==0.25.0
 geopandas
