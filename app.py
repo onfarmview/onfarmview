@@ -1,6 +1,5 @@
 
 import ee
-import fiona
 import geopandas as gpd
 import streamlit as st
 import geemap.colormaps as cm
