@@ -30,26 +30,26 @@ st.markdown(
     """
 )
 
-def maskCloudAndShadows(image):
-  cloudProb = image.select('MSK_CLDPRB')
-  snowProb = image.select('MSK_SNWPRB')
-  cloud = cloudProb.lt(5)
-  snow = snowProb.lt(5)
-  scl = image.select('SCL')
-  shadow = scl.eq(3); # 3 = cloud shadow
-  cirrus = scl.eq(10); # 10 = cirrus
-  # Cloud probability less than 5% or cloud shadow classification
-  mask = (cloud.And(snow)).And(cirrus.neq(1)).And(shadow.neq(1))
-  return image.updateMask(mask)
-def getNDVI(image): 
-    ndvi = image.normalizedDifference(['B8','B4']).rename("NDVI")
-    image = image.addBands(ndvi)
-    return(image)
+# def maskCloudAndShadows(image):
+#   cloudProb = image.select('MSK_CLDPRB')
+#   snowProb = image.select('MSK_SNWPRB')
+#   cloud = cloudProb.lt(5)
+#   snow = snowProb.lt(5)
+#   scl = image.select('SCL')
+#   shadow = scl.eq(3); # 3 = cloud shadow
+#   cirrus = scl.eq(10); # 10 = cirrus
+#   # Cloud probability less than 5% or cloud shadow classification
+#   mask = (cloud.And(snow)).And(cirrus.neq(1)).And(shadow.neq(1))
+#   return image.updateMask(mask)
+# def getNDVI(image): 
+#     ndvi = image.normalizedDifference(['B8','B4']).rename("NDVI")
+#     image = image.addBands(ndvi)
+#     return(image)
 
-def addDate(image):
-    img_date = ee.Date(image.date())
-    img_date = ee.Number.parse(img_date.format('YYYYMMdd'))
-    return image.addBands(ee.Image(img_date).rename('date').toInt())
+# def addDate(image):
+#     img_date = ee.Date(image.date())
+#     img_date = ee.Number.parse(img_date.format('YYYYMMdd'))
+#     return image.addBands(ee.Image(img_date).rename('date').toInt())
 
 
 service_account =  "ofv-99@ee-ofv.iam.gserviceaccount.com"
@@ -81,7 +81,7 @@ Map = geemap.Map(
     plugin_Draw=True,
     Draw_export=True,
     # locate_control=True,
-    plugin_LatLngPopup=False, center=(-43.525650, 172.639847), zoom=6.25,
+    plugin_LatLngPopup=True, center=(-43.525650, 172.639847), zoom=6.25,
 )
 
 # filename = "data.geojson"
