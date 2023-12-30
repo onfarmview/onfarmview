@@ -30,26 +30,26 @@ st.markdown(
     """
 )
 
-# def maskCloudAndShadows(image):
-#   cloudProb = image.select('MSK_CLDPRB')
-#   snowProb = image.select('MSK_SNWPRB')
-#   cloud = cloudProb.lt(5)
-#   snow = snowProb.lt(5)
-#   scl = image.select('SCL')
-#   shadow = scl.eq(3); # 3 = cloud shadow
-#   cirrus = scl.eq(10); # 10 = cirrus
-#   # Cloud probability less than 5% or cloud shadow classification
-#   mask = (cloud.And(snow)).And(cirrus.neq(1)).And(shadow.neq(1))
-#   return image.updateMask(mask)
-# def getNDVI(image): 
-#     ndvi = image.normalizedDifference(['B8','B4']).rename("NDVI")
-#     image = image.addBands(ndvi)
-#     return(image)
+def maskCloudAndShadows(image):
+  cloudProb = image.select('MSK_CLDPRB')
+  snowProb = image.select('MSK_SNWPRB')
+  cloud = cloudProb.lt(5)
+  snow = snowProb.lt(5)
+  scl = image.select('SCL')
+  shadow = scl.eq(3); # 3 = cloud shadow
+  cirrus = scl.eq(10); # 10 = cirrus
+  # Cloud probability less than 5% or cloud shadow classification
+  mask = (cloud.And(snow)).And(cirrus.neq(1)).And(shadow.neq(1))
+  return image.updateMask(mask)
+def getNDVI(image): 
+    ndvi = image.normalizedDifference(['B8','B4']).rename("NDVI")
+    image = image.addBands(ndvi)
+    return(image)
 
-# def addDate(image):
-#     img_date = ee.Date(image.date())
-#     img_date = ee.Number.parse(img_date.format('YYYYMMdd'))
-#     return image.addBands(ee.Image(img_date).rename('date').toInt())
+def addDate(image):
+    img_date = ee.Date(image.date())
+    img_date = ee.Number.parse(img_date.format('YYYYMMdd'))
+    return image.addBands(ee.Image(img_date).rename('date').toInt())
 
 
 service_account =  "ofv-99@ee-ofv.iam.gserviceaccount.com"
@@ -94,8 +94,8 @@ vis_params = {
   'palette': palette}
 aoi= geemap.gdf_to_ee(gdf, geodesic=False)    
 Map.centerObject(aoi)
-# NDVI_data = ee.ImageCollection('COPERNICUS/S2_SR').filterDate(start_date, end_date).filter(ee.Filter.lt("CLOUDY_PIXEL_PERCENTAGE",90)).map(maskCloudAndShadows).map(getNDVI).map(addDate).median()
-# Map.addLayer(NDVI_data.select('NDVI'), vis_params, "Median of NDVI")    
+NDVI_data = ee.ImageCollection('COPERNICUS/S2_SR').filterDate(start_date, end_date).filter(ee.Filter.lt("CLOUDY_PIXEL_PERCENTAGE",90)).map(maskCloudAndShadows).map(getNDVI).map(addDate).median()
+Map.addLayer(NDVI_data.clip(aoi).select('NDVI'), vis_params, "Median of NDVI")    
 
 Map.addLayerControl()
 Map.to_streamlit(height=600)
