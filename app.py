@@ -1,17 +1,10 @@
 
 import ee
-import os
-import warnings
-import datetime
 import fiona
 import geopandas as gpd
-import folium
 import streamlit as st
 import geemap.colormaps as cm
 import geemap.foliumap as geemap
-from datetime import date
-from shapely.geometry import Polygon
-from shapely.geometry import MultiPolygon
 from datetime import date, timedelta, datetime
 
 st.set_page_config(layout="wide")
@@ -37,25 +30,7 @@ st.markdown(
     An online interactive mapping tool to display basic vegetative metrics available over New Zealand.
     """
 )
-def uploaded_file_to_gdf(data):
-    import tempfile
-    import os
-    import uuid
 
-    _, file_extension = os.path.splitext(data.name)
-    file_id = str(uuid.uuid4())
-    file_path = os.path.join(tempfile.gettempdir(), f"{file_id}{file_extension}")
-
-    with open(file_path, "wb") as file:
-        file.write(data.getbuffer())
-
-    if file_path.lower().endswith(".kml"):
-        fiona.drvsupport.supported_drivers["KML"] = "rw"
-        gdf = gpd.read_file(file_path, driver="KML")
-    else:
-        gdf = gpd.read_file(file_path)
-
-    return gdf
 def maskCloudAndShadows(image):
   cloudProb = image.select('MSK_CLDPRB')
   snowProb = image.select('MSK_SNWPRB')
