@@ -59,21 +59,21 @@ credentials = ee.ServiceAccountCredentials(
 )
 ee.Initialize(credentials)
 
-today = date.today()
-default_date_yesterday = today - timedelta(days=1)
+# today = date.today()
+# default_date_yesterday = today - timedelta(days=1)
 
-sd = st.date_input(
-    "Start date", date(2023, 10, 1), min_value= date(2015, 6, 23),
-    max_value= today,
-    )
+# sd = st.date_input(
+#     "Start date", date(2023, 10, 1), min_value= date(2015, 6, 23),
+#     max_value= today,
+#     )
 
-ed = st.date_input(
-    "End date",
-    default_date_yesterday,
-    min_value= date(2023, 12, 1),max_value= today)      
+# ed = st.date_input(
+#     "End date",
+#     default_date_yesterday,
+#     min_value= date(2023, 12, 1),max_value= today)      
 
-start_date = sd.strftime("%Y-%m-%d") + "T" 
-end_date = ed.strftime("%Y-%m-%d") + "T" 
+# start_date = sd.strftime("%Y-%m-%d") + "T" 
+# end_date = ed.strftime("%Y-%m-%d") + "T" 
 
 
 Map = geemap.Map(
