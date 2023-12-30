@@ -96,7 +96,7 @@ vis_params = {
   'max': 1,
   'palette': palette}
 aoi= geemap.gdf_to_ee(gdf, geodesic=False)    
-Map.centerObject(aoi, zoom=15)
+Map.centerObject(aoi, zoom=13)
 NDVI_data = ee.ImageCollection('COPERNICUS/S2_SR').filterDate(start_date, end_date).filter(ee.Filter.lt("CLOUDY_PIXEL_PERCENTAGE",90)).map(maskCloudAndShadows).map(getNDVI).map(addDate).median()
 Map.addLayer(NDVI_data.clip(aoi).select('NDVI'), vis_params, "Median of NDVI")    
 Map.add_colormap(width=10, height=0.1, vmin=0, vmax=1,vis_params= vis_params,label="NDVI", position=(0, 0))  
