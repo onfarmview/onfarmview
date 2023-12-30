@@ -82,18 +82,18 @@ Map = geemap.Map(
     plugin_LatLngPopup=False, center=(-43.525650, 172.639847), zoom=6.25,
 )
 
-filename = "data.geojson"
-file = open(filename)
-gdf = gpd.read_file(file)
+# filename = "data.geojson"
+# file = open(filename)
+# gdf = gpd.read_file(file)
 palette = ['FFFFFF', 'CE7E45', 'DF923D', 'F1B555', 'FCD163', '99B718', '74A901', '66A000', '529400', '3E8601', '207401', '056201', '004C00', '023B01', '012E01', '011D01', '011301']
 vis_params = {
   'min': 0,
   'max': 1,
   'palette': palette}
-aoi= geemap.gdf_to_ee(gdf, geodesic=False)    
-Map.centerObject(aoi)
-NDVI_data = ee.ImageCollection('COPERNICUS/S2_SR').filterDate(start_date, end_date).filterBounds(aoi).filter(ee.Filter.lt("CLOUDY_PIXEL_PERCENTAGE",90)).map(maskCloudAndShadows).map(getNDVI).map(addDate).median()
-Map.addLayer(NDVI_data.clip(aoi).select('NDVI'), vis_params, "Median of NDVI")    
+# aoi= geemap.gdf_to_ee(gdf, geodesic=False)    
+# Map.centerObject(aoi)
+NDVI_data = ee.ImageCollection('COPERNICUS/S2_SR').filterDate(start_date, end_date).filter(ee.Filter.lt("CLOUDY_PIXEL_PERCENTAGE",90)).map(maskCloudAndShadows).map(getNDVI).map(addDate).median()
+Map.addLayer(NDVI_data.select('NDVI'), vis_params, "Median of NDVI")    
 
 Map.addLayerControl()
 Map.to_streamlit(height=600)
