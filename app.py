@@ -83,6 +83,7 @@ private_key = st.secrets["EARTHENGINE_TOKEN"]
 credentials = ee.ServiceAccountCredentials(
     service_account, key_data=private_key
 )
+ee.Initialize(credentials)
 today = date.today()
 default_date_yesterday = today - timedelta(days=1)
 sd = st.date_input(
@@ -98,7 +99,7 @@ ed = st.date_input(
 start_date = sd.strftime("%Y-%m-%d") + "T" 
 end_date = ed.strftime("%Y-%m-%d") + "T" 
 
-ee.Initialize(credentials)
+
 Map = geemap.Map(
     basemap="HYBRID",
     plugin_Draw=True,
