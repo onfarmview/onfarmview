@@ -61,8 +61,10 @@ ee.Initialize(credentials)
 
 today = date.today()
 default_date_yesterday = today - timedelta(days=1)
-cols1,_ = st.columns((1,2)) 
-row1_col1, row1_col2 = st.columns([2, 1])
+
+# cols1,_ = st.columns((1,2)) 
+# col1, col2, col3 = st.columns(3)
+row1_col0, row1_col1, row1_col2 = st.columns([3, 1])
 with row1_col1:
     sd = st.date_input(
         "Start date", date(2023, 10, 1), min_value= date(2015, 6, 23),
@@ -96,7 +98,7 @@ vis_params = {
   'max': 1,
   'palette': palette}
 aoi= geemap.gdf_to_ee(gdf, geodesic=False)    
-Map.centerObject(aoi, zoom=13)
+Map.centerObject(aoi, zoom=14)
 NDVI_data = ee.ImageCollection('COPERNICUS/S2_SR').filterDate(start_date, end_date).filter(ee.Filter.lt("CLOUDY_PIXEL_PERCENTAGE",90)).map(maskCloudAndShadows).map(getNDVI).map(addDate).median()
 Map.addLayer(NDVI_data.clip(aoi).select('NDVI'), vis_params, "Median of NDVI")    
 Map.add_colormap(width=10, height=0.1, vmin=0, vmax=1,vis_params= vis_params,label="NDVI", position=(0, 0))  
