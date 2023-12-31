@@ -75,7 +75,7 @@ def extract_exterior_coords(file_path):
             for pt in list(row['geometry'].exterior.coords):
                 exterior_coords.append(list(pt))
         elif row['geometry'].geom_type == 'MultiPolygon':
-            for polygon in row['geometry']:
+            for polygon in row['geometry'].geoms:
                 for pt in list(polygon.exterior.coords):
                     exterior_coords.append(list(pt))
     return exterior_coords
