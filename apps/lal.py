@@ -84,7 +84,7 @@ def extract_exterior_coords(file_path):
 cantho = extract_exterior_coords("data/vnshp/cantho.shp")
 danang = extract_exterior_coords("data/vnshp/danang.shp")
 hanoi = extract_exterior_coords("data/vnshp/hanoi.shp")
-hochiminh = extract_exterior_coords("data/vnshp/hochiminh.shp")
+hcm = extract_exterior_coords("data/vnshp/hochiminh.shp")
 hue = extract_exterior_coords("data/vnshp/hue.shp")
 
 
