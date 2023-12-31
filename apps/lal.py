@@ -31,38 +31,62 @@ nz_rois = {
 
 # Load VN
 
-shp = gpd.read_file("data/vnshp/cantho.shp")
-gdf = shp.to_crs({'init': 'epsg:4326'}) 
-can = []
-for index, row in gdf.iterrows():
-    for pt in list(row['geometry'].exterior.coords): 
-        can.append(list(pt))
+# shp = gpd.read_file("data/vnshp/cantho.shp")
+# gdf = shp.to_crs({'init': 'epsg:4326'}) 
+# can = []
+# for index, row in gdf.iterrows():
+#     for pt in list(row['geometry'].exterior.coords): 
+#         can.append(list(pt))
 
-shp = gpd.read_file("data/vnshp/danang.shp")
-gdf = shp.to_crs({'init': 'epsg:4326'}) 
-danang = []
-for index, row in gdf.iterrows():
-    for pt in list(row['geometry'].exterior.coords): 
-        danang.append(list(pt))
+# shp = gpd.read_file("data/vnshp/danang.shp")
+# gdf = shp.to_crs({'init': 'epsg:4326'}) 
+# danang = []
+# for index, row in gdf.iterrows():
+#     for pt in list(row['geometry'].exterior.coords): 
+#         danang.append(list(pt))
 
-shp = gpd.read_file("data/vnshp/hanoi.shp")
-gdf = shp.to_crs({'init': 'epsg:4326'}) 
-hanoi = []
-for index, row in gdf.iterrows():
-    for pt in list(row['geometry'].exterior.coords): 
-        hanoi.append(list(pt))
-shp = gpd.read_file("data/vnshp/hochiminh.shp")
-gdf = shp.to_crs({'init': 'epsg:4326'}) 
-hcm = []
-for index, row in gdf.iterrows():
-    for pt in list(row['geometry'].exterior.coords): 
-        hcm.append(list(pt))
-shp = gpd.read_file("data/vnshp/hue.shp")
-gdf = shp.to_crs({'init': 'epsg:4326'}) 
-hue = []
-for index, row in gdf.iterrows():
-    for pt in list(row['geometry'].exterior.coords): 
-        hue.append(list(pt))
+# shp = gpd.read_file("data/vnshp/hanoi.shp")
+# gdf = shp.to_crs({'init': 'epsg:4326'}) 
+# hanoi = []
+# for index, row in gdf.iterrows():
+#     for pt in list(row['geometry'].exterior.coords): 
+#         hanoi.append(list(pt))
+# shp = gpd.read_file("data/vnshp/hochiminh.shp")
+# gdf = shp.to_crs({'init': 'epsg:4326'}) 
+# hcm = []
+# for index, row in gdf.iterrows():
+#     for pt in list(row['geometry'].exterior.coords): 
+#         hcm.append(list(pt))
+# shp = gpd.read_file("data/vnshp/hue.shp")
+# gdf = shp.to_crs({'init': 'epsg:4326'}) 
+# hue = []
+# for index, row in gdf.iterrows():
+#     for pt in list(row['geometry'].exterior.coords): 
+#         hue.append(list(pt))
+
+# import geopandas as gpd
+
+def extract_exterior_coords(file_path):
+    shp = gpd.read_file(file_path)
+    gdf = shp.to_crs('epsg:4326')
+    exterior_coords = []
+    for index, row in gdf.iterrows():
+        if row['geometry'].geom_type == 'Polygon':
+            for pt in list(row['geometry'].exterior.coords):
+                exterior_coords.append(list(pt))
+        elif row['geometry'].geom_type == 'MultiPolygon':
+            for polygon in row['geometry']:
+                for pt in list(polygon.exterior.coords):
+                    exterior_coords.append(list(pt))
+    return exterior_coords
+
+# Extract exterior coordinates for each city
+cantho_exterior = extract_exterior_coords("data/vnshp/cantho.shp")
+danang_exterior = extract_exterior_coords("data/vnshp/danang.shp")
+hanoi_exterior = extract_exterior_coords("data/vnshp/hanoi.shp")
+hochiminh_exterior = extract_exterior_coords("data/vnshp/hochiminh.shp")
+hue_exterior = extract_exterior_coords("data/vnshp/hue.shp")
+
 
 vnm_rois = {
     "Can Tho city":Polygon (can),
