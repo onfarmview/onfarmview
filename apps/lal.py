@@ -81,15 +81,15 @@ def extract_exterior_coords(file_path):
     return exterior_coords
 
 # Extract exterior coordinates for each city
-cantho_exterior = extract_exterior_coords("data/vnshp/cantho.shp")
-danang_exterior = extract_exterior_coords("data/vnshp/danang.shp")
-hanoi_exterior = extract_exterior_coords("data/vnshp/hanoi.shp")
-hochiminh_exterior = extract_exterior_coords("data/vnshp/hochiminh.shp")
-hue_exterior = extract_exterior_coords("data/vnshp/hue.shp")
+cantho = extract_exterior_coords("data/vnshp/cantho.shp")
+danang = extract_exterior_coords("data/vnshp/danang.shp")
+hanoi = extract_exterior_coords("data/vnshp/hanoi.shp")
+hochiminh = extract_exterior_coords("data/vnshp/hochiminh.shp")
+hue = extract_exterior_coords("data/vnshp/hue.shp")
 
 
 vnm_rois = {
-    "Can Tho city":Polygon (can),
+    "Can Tho city":Polygon (cantho),
     "Da Nang city": Polygon(  danang  ),
     "Ha Noi city": Polygon(  hanoi  ),
     "Ho  Chi Minh city": Polygon(  hcm  ),
