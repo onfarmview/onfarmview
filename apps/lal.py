@@ -1,33 +1,33 @@
 from shapely.geometry import Polygon
 import geopandas as gpd
 # Load shp files
-shp = gpd.read_file("data/nzshp/Canterbury.shp")
-gdf = shp.to_crs({'init': 'epsg:4326'}) 
-can = []
-for index, row in gdf.iterrows():
-    for pt in list(row['geometry'].exterior.coords): 
-        can.append(list(pt))
+# shp = gpd.read_file("data/nzshp/Canterbury.shp")
+# gdf = shp.to_crs({'init': 'epsg:4326'}) 
+# can = []
+# for index, row in gdf.iterrows():
+#     for pt in list(row['geometry'].exterior.coords): 
+#         can.append(list(pt))
 
-shp = gpd.read_file("data/nzshp/Mitimiti.shp")
-gdf = shp.to_crs({'init': 'epsg:4326'}) 
-Mitimiti = []
-for index, row in gdf.iterrows():
-    for pt in list(row['geometry'].exterior.coords): 
-        Mitimiti.append(list(pt))
+# shp = gpd.read_file("data/nzshp/Mitimiti.shp")
+# gdf = shp.to_crs({'init': 'epsg:4326'}) 
+# Mitimiti = []
+# for index, row in gdf.iterrows():
+#     for pt in list(row['geometry'].exterior.coords): 
+#         Mitimiti.append(list(pt))
 
-shp = gpd.read_file("data/nzshp/Urewera.shp")
-gdf = shp.to_crs({'init': 'epsg:4326'}) 
-Urewera = []
-for index, row in gdf.iterrows():
-    for pt in list(row['geometry'].exterior.coords): 
-        Urewera.append(list(pt))
+# shp = gpd.read_file("data/nzshp/Urewera.shp")
+# gdf = shp.to_crs({'init': 'epsg:4326'}) 
+# Urewera = []
+# for index, row in gdf.iterrows():
+#     for pt in list(row['geometry'].exterior.coords): 
+#         Urewera.append(list(pt))
 
-nz_rois = {
-    "Canterbury":Polygon (can),
-    "Mitimiti": Polygon(  Mitimiti  ),
-    "Te Urewera": Polygon(  Urewera  ),
+# nz_rois = {
+#     "Canterbury":Polygon (can),
+#     "Mitimiti": Polygon(  Mitimiti  ),
+#     "Te Urewera": Polygon(  Urewera  ),
 
-}
+# }
 
 # Load VN
 
@@ -80,7 +80,7 @@ def extract_exterior_coords(file_path):
                     exterior_coords.append(list(pt))
     return exterior_coords
 
-# Extract exterior coordinates for each city
+# Vietnam
 cantho = extract_exterior_coords("data/vnshp/cantho.shp")
 danang = extract_exterior_coords("data/vnshp/danang.shp")
 hanoi = extract_exterior_coords("data/vnshp/hanoi.shp")
@@ -94,5 +94,19 @@ vnm_rois = {
     "Ha Noi city": Polygon(  hanoi  ),
     "Ho  Chi Minh city": Polygon(  hcm  ),
     "Hue": Polygon(  hue  ),
+
+}
+
+# NZ
+auck = extract_exterior_coords("data/nzshp/auck.shp")
+chch = extract_exterior_coords("data/nzshp/chch.shp")
+dun = extract_exterior_coords("data/nzshp/dun.shp")
+welly = extract_exterior_coords("data/nzshp/welly.shp")
+
+nz_rois = {
+    "Auckland":Polygon (auck),
+    "Christchurch": Polygon(  chch  ),
+    "Dunedin": Polygon(dun),
+    "Wellington": Polygon(welly),
 
 }
