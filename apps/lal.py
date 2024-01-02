@@ -98,13 +98,13 @@ vnm_rois = {
 }
 
 # NZ
-auck = extract_exterior_coords("data/nzshp/auck.shp")
+# auck = extract_exterior_coords("data/nzshp/auck.shp")
 chch = extract_exterior_coords("data/nzshp/chch.shp")
 dun = extract_exterior_coords("data/nzshp/dun.shp")
 welly = extract_exterior_coords("data/nzshp/welly.shp")
 
 nz_rois = {
-    "Auckland":Polygon (auck),
+    # "Auckland":Polygon (auck),
     "Christchurch": Polygon(  chch  ),
     "Dunedin": Polygon(dun),
     "Wellington": Polygon(welly),
