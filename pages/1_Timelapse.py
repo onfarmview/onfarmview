@@ -32,12 +32,20 @@ ee.Initialize(credentials)
 st.set_page_config(layout="wide")
 warnings.filterwarnings("ignore")
 
-@st.cache_data
-def ee_authenticate(token_name="EARTHENGINE_TOKEN"):
-    geemap.ee_initialize(token_name=token_name)
+# Vietnam
+cantho = extract_exterior_coords("data/vnshp/cantho.shp")
+danang = extract_exterior_coords("data/vnshp/danang.shp")
+hanoi = extract_exterior_coords("data/vnshp/hanoi.shp")
+hcm = extract_exterior_coords("data/vnshp/hochiminh.shp")
+hue = extract_exterior_coords("data/vnshp/hue.shp")
 
-import geopandas as gpd
-shp = gpd.read_file("data/nzshp/Canterbury.shp")
+
+# @st.cache_data
+# def ee_authenticate(token_name="EARTHENGINE_TOKEN"):
+#     geemap.ee_initialize(token_name=token_name)
+
+
+shp = gpd.read_file("data/vnshp/cantho.shp")
 gdf = shp.to_crs({'init': 'epsg:4326'}) 
 
 can = []
@@ -46,65 +54,35 @@ for index, row in gdf.iterrows():
         can.append(list(pt))
 
 
-shp = gpd.read_file("data/nzshp/Mitimiti.shp")
+shp = gpd.read_file("data/vnshp/hanoi.shp")
 gdf = shp.to_crs({'init': 'epsg:4326'}) 
 
-Mitimiti = []
+hn = []
 for index, row in gdf.iterrows():
     for pt in list(row['geometry'].exterior.coords): 
-        Mitimiti.append(list(pt))
+        hn.append(list(pt))
 
-shp = gpd.read_file("data/nzshp/Urewera.shp")
+shp = gpd.read_file("data/vnshp/hochiminh.shp")
 gdf = shp.to_crs({'init': 'epsg:4326'}) 
 
-Urewera = []
+hcm = []
 for index, row in gdf.iterrows():
     for pt in list(row['geometry'].exterior.coords): 
-        Urewera.append(list(pt))
+        hcm.append(list(pt))
 
 
 landsat_rois = {
-    "Canterbury":Polygon (can),
-    "Mitimiti": Polygon(  Mitimiti  ),
-    "Te Urewera": Polygon(  Urewera  ),
+    "Can Tho city":Polygon (can),
+    "Ha Noi city": Polygon(  hn  ),
+    "Ho Chi Minh city": Polygon(  hcm  ),
 
 }
 
 
 modis_rois = {
-    "Canterbury": Polygon(can),
-    "Mitimiti": Polygon(  Mitimiti  ),
-    "Te Urewera": Polygon(  Urewera  ),
-}
-
-ocean_rois = {
-    "Gulf of Mexico": Polygon(
-        [
-            [-101.206055, 15.496032],
-            [-101.206055, 32.361403],
-            [-75.673828, 32.361403],
-            [-75.673828, 15.496032],
-            [-101.206055, 15.496032],
-        ]
-    ),
-    "North Atlantic Ocean": Polygon(
-        [
-            [-85.341797, 24.046464],
-            [-85.341797, 45.02695],
-            [-55.810547, 45.02695],
-            [-55.810547, 24.046464],
-            [-85.341797, 24.046464],
-        ]
-    ),
-    "World": Polygon(
-        [
-            [-171.210938, -57.136239],
-            [-171.210938, 79.997168],
-            [177.539063, 79.997168],
-            [177.539063, -57.136239],
-            [-171.210938, -57.136239],
-        ]
-    ),
+    "Can Tho city":Polygon (can),
+    "Ha Noi city": Polygon(  hn  ),
+    "Ho Chi Minh city": Polygon(  hcm  ),
 }
 
 @st.cache_data
