@@ -12,7 +12,7 @@ import geemap.foliumap as geemap
 from datetime import date
 from shapely.geometry import Polygon
 from shapely.geometry import MultiPolygon
-
+import apps.lal as lal
 
 # st.write("DB username:", st.secrets["db_username"])
 # st.write("DB password:", st.secrets["db_password"])
@@ -33,11 +33,11 @@ st.set_page_config(layout="wide")
 warnings.filterwarnings("ignore")
 
 # Vietnam
-cantho = extract_exterior_coords("data/vnshp/cantho.shp")
-danang = extract_exterior_coords("data/vnshp/danang.shp")
-hanoi = extract_exterior_coords("data/vnshp/hanoi.shp")
-hcm = extract_exterior_coords("data/vnshp/hochiminh.shp")
-hue = extract_exterior_coords("data/vnshp/hue.shp")
+# cantho = extract_exterior_coords("data/vnshp/cantho.shp")
+# danang = extract_exterior_coords("data/vnshp/danang.shp")
+# hanoi = extract_exterior_coords("data/vnshp/hanoi.shp")
+# hcm = extract_exterior_coords("data/vnshp/hochiminh.shp")
+# hue = extract_exterior_coords("data/vnshp/hue.shp")
 
 
 # @st.cache_data
@@ -169,15 +169,16 @@ def app():
             "Landsat TM-ETM-OLI Surface Reflectance",
             "Sentinel-2 MSI Surface Reflectance",
         ]:
-            roi_options = ["Uploaded GeoJSON"] + list(landsat_rois.keys())
+            # roi_options = ["Uploaded GeoJSON"] + list(landsat_rois.keys())
+            roi_options = ["Uploaded GeoJSON"] + list(lal.vnm_rois.keys())
 
         elif collection in [
             "MODIS Vegetation Indices (NDVI/EVI) 16-Day Global 1km",
             "MODIS Gap filled Land Surface Temperature Daily",
         ]:
             roi_options = ["Uploaded GeoJSON"] + list(modis_rois.keys())
-        elif collection == "MODIS Ocean Color SMI":
-            roi_options = ["Uploaded GeoJSON"] + list(ocean_rois.keys())
+        # elif collection == "MODIS Ocean Color SMI":
+        #     roi_options = ["Uploaded GeoJSON"] + list(ocean_rois.keys())
         else:
             roi_options = ["Uploaded GeoJSON"]
 
@@ -449,11 +450,11 @@ def app():
                 "Sentinel-2 MSI Surface Reflectance",
             ]:
                 gdf = gpd.GeoDataFrame(
-                    index=[0], crs=crs, geometry=[landsat_rois[sample_roi]]
+                    index=[0], crs=crs, geometry=[lal.vnm_rois[sample_roi]]
                 )
             elif collection == "MODIS Vegetation Indices (NDVI/EVI) 16-Day Global 1km":
                 gdf = gpd.GeoDataFrame(
-                    index=[0], crs=crs, geometry=[modis_rois[sample_roi]]
+                    index=[0], crs=crs, geometry=[lal.vnm_rois[sample_roi]]
                 )
 
         if sample_roi != "Uploaded GeoJSON":
@@ -463,7 +464,7 @@ def app():
                 "Sentinel-2 MSI Surface Reflectance",
             ]:
                 gdf = gpd.GeoDataFrame(
-                    index=[0], crs=crs, geometry=[landsat_rois[sample_roi]]
+                    index=[0], crs=crs, geometry=[lal.vnm_rois[sample_roi]]
                 )
 
             elif collection in [
@@ -471,11 +472,11 @@ def app():
                 "MODIS Gap filled Land Surface Temperature Daily",
             ]:
                 gdf = gpd.GeoDataFrame(
-                    index=[0], crs=crs, geometry=[modis_rois[sample_roi]]
+                    index=[0], crs=crs, geometry=[lal.vnm_rois[sample_roi]]
                 )
             elif collection == "MODIS Ocean Color SMI":
                 gdf = gpd.GeoDataFrame(
-                    index=[0], crs=crs, geometry=[ocean_rois[sample_roi]]
+                    index=[0], crs=crs, geometry=[lal.vnm_rois[sample_roi]]
                 )
             try:
                 st.session_state["roi"] = geemap.gdf_to_ee(gdf, geodesic=False)
