@@ -15,7 +15,7 @@ import calendar
 import plotly.express as px
 from streamlit_plotly_events import plotly_events
 from plotly.offline import plot
-import geemap.colormaps as cm
+# import geemap.colormaps as cm
 import apps.lal as lal
 st.set_page_config(layout="wide")
 warnings.filterwarnings("ignore")
